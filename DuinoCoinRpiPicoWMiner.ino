@@ -3,111 +3,18 @@
   (  _ \(  )(  )(_  _)( \( )(  _  )___  / __)(  _  )(_  _)( \( )
    )(_) ))(__)(  _)(_  )  (  )(_)((___)( (__  )(_)(  _)(_  )  (
   (____/(______)(____)(_)\_)(_____)     \___)(_____)(____)(_)\_)
-  Official code for ESP8266 boards                   version 3.4
-
-  Duino-Coin Team & Community 2019-2022 © MIT Licensed
-  https://duinocoin.com
-  https://github.com/revoxhere/duino-coin
-
-  If you don't know where to start, visit official website and navigate to
-  the Getting Started page. Have fun mining!
+  Code for RP2040 Wifi boards                   version 3.4
+  Have fun mining!
 */
 
-/* If optimizations cause problems, change them to -O0 (the default)
-  NOTE: For even better optimizations also edit your Crypto.h file.
-  On linux that file can be found in the following location:
-  ~/.arduino15//packages/esp8266/hardware/esp8266/3.0.2/cores/esp8266/ */
 #pragma GCC optimize ("-Ofast")
-
-/* If during compilation the line below causes a
-  "fatal error: arduinoJson.h: No such file or directory"
-  message to occur; it means that you do NOT have the
-  ArduinoJSON library installed. To install it,
-  go to the below link and follow the instructions:
-  https://github.com/revoxhere/duino-coin/issues/832 */
 #include <ArduinoJson.h>
-
 #include <ArduinoOTA.h>
 #include <WiFiClient.h>
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-#ifdef USE_DHT
-float temp = 0.0;
-float hum = 0.0;
-
-// Install "DHT sensor library" if you get an error
-#include <DHT.h>
-// Change D3 to the pin you've connected your sensor to
-#define DHTPIN D3
-// Set DHT11 or DHT22 accordingly
-#define DHTTYPE DHT11
-
-DHT dht(DHTPIN, DHTTYPE);
-#endif
-
-#ifdef USE_MQTT
-// Install "PubSubClient" if you get an error
-//#include <PubSubClient.h>
-
-long lastMsg = 0;
-
-// Change the part in brackets to your MQTT broker address
-#define mqtt_server "broker.hivemq.com"
-// broker.hivemq.com is for testing purposes, change it to your broker address
-
-// Change this to your MQTT broker port
-#define mqtt_port 1883
-// If you want to use user and password for your MQTT broker, uncomment the line below
-// #define mqtt_use_credentials
-
-// Change the part in brackets to your MQTT broker username
-#define mqtt_user "My cool mqtt username"
-// Change the part in brackets to your MQTT broker password
-#define mqtt_password "My secret mqtt pass"
-
-// Change this if you want to send data to the topic every X milliseconds
-#define mqtt_update_time 5000
-
-// Change the part in brackets to your MQTT humidity topic
-#define humidity_topic "sensor/humidity"
-// Change the part in brackets to your MQTT temperature topic
-#define temperature_topic "sensor/temperature"
-
 WiFiClient espClient;
-PubSubClient mqttClient(espClient);
-
-void mqttReconnect()
-{
-  // Loop until we're reconnected
-  while (!mqttClient.connected())
-  {
-    Serial.print("Attempting MQTT connection...");
-
-    // Create a random client ID
-    String clientId = "ESP8266Client-";
-    clientId += String(random(0xffff), HEX);
-
-    // Attempt to connect
-#ifdef mqtt_use_credentials
-    if (mqttClient.connect("ESP8266Client", mqtt_user, mqtt_password))
-#else
-    if (mqttClient.connect(clientId.c_str()))
-#endif
-    {
-      Serial.println("connected");
-    }
-    else
-    {
-      Serial.print("failed, rc=");
-      Serial.print(mqttClient.state());
-      Serial.println(" try again in 5 seconds");
-      // Wait 5 seconds before retrying
-      delay(5000);
-    }
-  }
-}
-#endif
 
 namespace
 {
@@ -647,31 +554,8 @@ void setup() {
   if (USE_HIGHER_DIFF) START_DIFF = "ESP8266NH";
   else START_DIFF = "ESP8266N";
 
-
-/*
-  if(WEB_DASHBOARD) {
-    if (!MDNS.begin(RIG_IDENTIFIER)) {
-      Serial.println("mDNS unavailable");
-    }
-    MDNS.addService("http", "tcp", 80);
-    Serial.print("Configured mDNS for dashboard on http://" 
-                  + String(RIG_IDENTIFIER)
-                  + ".local (or http://"
-                  + WiFi.localIP().toString()
-                  + ")");
-    server.on("/", dashboard);
-    if (WEB_HASH_UPDATER) server.on("/hashrateread", hashupdater);
-    server.begin();
-  }
-*/
   blink(BLINK_SETUP_COMPLETE);
 }
-/*
-#include <Scheduler.h>
-#include "pico/multicore.h"
-
- multicore_launch_core1(loop);
-*/
 
 
 void loop() {
@@ -691,42 +575,6 @@ void loop() {
 
   ConnectToServer();
   Serial.println("Asking for a new job for user: " + String(DUCO_USER));
-
-  #ifndef USE_DHT
-    client.print("JOB," + 
-                 String(DUCO_USER) + SEP_TOKEN +
-                 String(START_DIFF) + SEP_TOKEN +
-                 String(MINER_KEY) + END_TOKEN);
-  #endif
-
-  #ifdef USE_DHT
-    temp = dht.readTemperature();
-    hum = dht.readHumidity();
-
-    Serial.println("DHT readings: " + String(temp) + "*C, " + String(hum) + "%");
-    client.print("JOB," + 
-                 String(DUCO_USER) + SEP_TOKEN +
-                 String(START_DIFF) + SEP_TOKEN +
-                 String(MINER_KEY) + SEP_TOKEN +
-                 String(temp) + "@" + String(hum) + END_TOKEN);
-  #endif
-  
-  #ifdef USE_MQTT
-  
-  if (!mqttClient.connected()) {
-    mqttReconnect();
-  }
-  mqttClient.loop();
-    #ifdef USE_DHT
-    long now = millis();
-    if (now - lastMsg > mqtt_update_time) {
-      lastMsg = now;
-      mqttClient.publish(temperature_topic, String(temp).c_str(), true);
-      mqttClient.publish(humidity_topic, String(hum).c_str(), true); 
-    }
-    #endif
-
-  #endif
 
   waitForClientData();
   Serial.println("Received job with size of " + String(client_buffer));
