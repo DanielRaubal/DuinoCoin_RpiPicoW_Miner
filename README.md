@@ -1,7 +1,7 @@
 # DuinoCoin_RpiPicoW_Miner
 code for rpi pico w (rp2040) duino coin miner
 <br>
-<img src="RpiPico.jpg" width="200" height="400"/>
+<img src="RpiPico.jpg" width="435" height="364"/>
 
 <br>
 ---
