@@ -6,7 +6,7 @@ code for rpi pico w (rp2040) duino coin miner
 <br>
 <p align="center">
 <img src="RpiPico.jpg" width="435" height="364"/>
-</p>
+
 <br>
 
 
@@ -17,6 +17,7 @@ STEP  | Description
 [3.] | Change variables based on your Duino account *DUCO_USER,*MINER_KEY,*SSID,*PASSWORD,*RIG_IDENTIFIER
 [4.] | Install these libraries <br> <br> ArduinoJson <br> ArduinoOTA <br> WiFiClient <br> HTTPClient
 [5.] | Upload and run it for board *Raspberry Pi Pico W*
-
+ 
+</p>
 
 
