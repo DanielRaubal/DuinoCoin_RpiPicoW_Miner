@@ -10,7 +10,7 @@
 #pragma GCC optimize ("-Ofast")
 #include <ArduinoJson.h>
 #include <ArduinoOTA.h>
-#include <WiFiClient.h>
+#include <WiFiClient.h>\
 #include <WiFi.h>
 #include <HTTPClient.h>
 
@@ -19,13 +19,13 @@ WiFiClient espClient;
 namespace
 {
 // Change the part in brackets to your Duino-Coin username
-const char *DUCO_USER = "DanielR90";
+const char *DUCO_USER = "userName";
 // Change the part in brackets to your mining key (if you have enabled it in the wallet)
-const char *MINER_KEY = "Ak35%@Fa11s";
+const char *MINER_KEY = "minerKey";
 // Change the part in brackets to your WiFi name
-const char *SSID = "LOKAL";
+const char *SSID = "WIFI";
 // Change the part in brackets to your WiFi password
-const char *PASSWORD = "cosicbosko2";
+const char *PASSWORD = "password";
 // Change the part in brackets if you want to set a custom miner name (use Auto to autogenerate, None for no name)
 const char *RIG_IDENTIFIER = "RPI PICO W";
 // Set to true to use the 160 MHz overclock mode (and not get the first share rejected)
