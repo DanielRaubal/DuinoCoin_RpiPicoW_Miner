@@ -1,4 +1,4 @@
-<h1 color="orange" align="center">Raspberry Pi Pico W DUINO COIN MINER</h1>
+!<h1 align="center">Raspberry Pi Pico W DUINO COIN MINER</h1>
 <p align="center">
 code for rpi pico w (rp2040) duino coin miner
 </p>
