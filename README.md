@@ -1,8 +1,12 @@
-# DuinoCoin_RpiPicoW_Miner
+<h1 align="center">Air Raid</h1>
+<p align="center">
 code for rpi pico w (rp2040) duino coin miner
+</p>
+ 
 <br>
+<p align="center">
 <img src="RpiPico.jpg" width="435" height="364"/>
-
+</p>
 <br>
 
 
