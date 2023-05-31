@@ -7,7 +7,14 @@ code for rpi pico w (rp2040) duino coin miner
 ---
 SETUP
 ---
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+
 [1.] Install Arduino IDE
+<br>
 [2.] Download these libraries // even thought you may need less of them install them all.
 
 https://arduino.esp8266.com/stable/package_esp8266com_index.json
