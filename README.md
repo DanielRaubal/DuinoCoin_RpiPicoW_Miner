@@ -1,8 +1,8 @@
-<h1 style="color:blue;" align="center">Raspberry Pi Pico W DUINO COIN MINER</h1>
+<h1 align="center">Raspberry Pi Pico W DUINO COIN MINER</h1>
 <p align="center">
 code for rpi pico w (rp2040) duino coin miner
 </p>
- <span style="color:blue">This is a blue h1 heading</span>
+
 
 <br>
 <p align="center">
