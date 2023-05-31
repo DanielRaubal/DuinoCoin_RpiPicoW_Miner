@@ -2,7 +2,8 @@
 <p align="center">
 code for rpi pico w (rp2040) duino coin miner
 </p>
- 
+ <span style="color:blue">This is a blue h1 heading</span>
+
 <br>
 <p align="center">
 <img src="RpiPico.jpg" width="435" height="364"/>
