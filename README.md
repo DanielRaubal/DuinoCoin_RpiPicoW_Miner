@@ -10,7 +10,7 @@ code for rpi pico w (rp2040) duino coin miner
 </p>
 <br>
 
-
+<center>
 STEP  | Description
 ------------- | -------------
 [1.]  | Install Arduino IDE
@@ -19,6 +19,6 @@ STEP  | Description
 [4.] | Install these libraries <br> <br> ArduinoJson <br> ArduinoOTA <br> WiFiClient <br> HTTPClient
 [5.] | Upload and run it for board *Raspberry Pi Pico W*
  
-
+</center>
 
 
