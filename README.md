@@ -11,6 +11,7 @@ code for rpi pico w (rp2040) duino coin miner
 <br>
 
 <center>
+ 
 STEP  | Description
 ------------- | -------------
 [1.]  | Install Arduino IDE
